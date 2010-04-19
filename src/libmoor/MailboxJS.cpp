@@ -11,7 +11,7 @@ std::string QMailBoxJS::doGetJS(std::string url)
 	this->setNetworkAccessManager(manager);
 	QNetworkRequest request;
 	QString urlStr;
-	 request.setUrl(QUrl(urlStr.fromStdString(url)));
+	request.setUrl(QUrl(urlStr.fromStdString(url)));
     request.setRawHeader("User-Agent", "User-Agent: Mozilla/5.0 (compatible;)");
     connect(manager, SIGNAL( sslErrors (QNetworkReply *,const QList<QSslError>&)),
          this, SLOT(sslErrors(QNetworkReply *,const QList<QSslError>&)));
@@ -23,12 +23,11 @@ std::string QMailBoxJS::doGetJS(std::string url)
 std::string QMailBoxJS::doPostJS(std::string url, std::string vars)
 {
 	QByteArray data;
-	QString a;
+	QString a,urlStr;
 	data=a.fromStdString(vars).toAscii();
 	manager = new QNetworkAccessManager;
 	this->setNetworkAccessManager(manager);
 	QNetworkRequest request;
-	QString urlStr;
 	request.setUrl(QUrl(urlStr.fromStdString(url)));
 	request.setRawHeader("User-Agent", "User-Agent: Mozilla/5.0 (compatible;)");
 	connect(manager, SIGNAL( sslErrors (QNetworkReply *,const QList<QSslError>&)),
@@ -53,11 +52,6 @@ void QMailBoxJS::sslErrors(QNetworkReply *reply,const QList<QSslError> &errors)
         {
                 err += e.errorString() + "\n";
         }
-}
-
-void QMailBoxJS::request_End(bool err)
-{
-	finished=true;
 }
 
 QMailBoxJS::~QMailBoxJS()
